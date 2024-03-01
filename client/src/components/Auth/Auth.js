@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Container,Grid,Avatar,Typography,Button,Paper } from "@material-ui/core";
 import { useDispatch } from 'react-redux';
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom"; 
-import Icon from './icon'
+// import Icon from './icon'
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "./Input";
@@ -47,22 +47,22 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   const token = res?.tokenId;
 
-    try {
-      dispatch({ type: 'AUTH', data: { result, token }});
-      history.push('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     dispatch({ type: 'AUTH', data: { result, token }});
+  //     history.push('/');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const googleFaliure = () => {
-    console.error();
-    console.log("Google Sign In was unsuccessful. Try again later");
-  };
+  // const googleFaliure = () => {
+  //   console.error();
+  //   console.log("Google Sign In was unsuccessful. Try again later");
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -86,7 +86,7 @@ const Auth = () => {
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }
           </Button>
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId="821252924026-rhrrjjamkglt269gssnco1t7tlqrit8i.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
@@ -96,7 +96,7 @@ const Auth = () => {
             onSuccess={googleSuccess}
             onFailure={googleFaliure}
             cookiePolicy="single_host_origin"
-          />
+          /> */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
