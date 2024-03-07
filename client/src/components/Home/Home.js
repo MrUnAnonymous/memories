@@ -5,7 +5,7 @@ import ChipInput from 'material-ui-chip-input'
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 import { useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
+import { getPosts, getPostsBySearch } from "../../actions/posts";
 import Pagination from "../Pagnation/Pagination";
 import useStyles from './styles' 
 
@@ -24,14 +24,9 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      //history.push(`/posts?searchQuery=${search}`);
+      searchPost();
     }
   }
 
@@ -40,8 +35,11 @@ const Home = () => {
   const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete ));
 
   const searchPost = () => {
-    if(search.trim()) {
-      
+    if(search.trim() || tags) {
+      dispatch(getPostsBySearch({ search, tags: tags.join(',') }))
+      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
+    } else {
+      history.push(`/`);
     }
   }
 
@@ -68,11 +66,11 @@ const Home = () => {
                 label="Search Tags"
                 variant="outlined"
               />
-              <Button className={classes.searchButton} color="primary" onClick={searchPost}>Search</Button>
+              <Button variant="contained" className={classes.searchButton} color="primary" onClick={searchPost}>Search</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
-              <Pagination />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>
