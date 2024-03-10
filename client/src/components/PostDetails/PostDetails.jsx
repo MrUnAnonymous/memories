@@ -7,17 +7,17 @@ import useStyles from './styles'
 import { getPost } from '../../actions/posts';
 
 const PostDetails = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const history = useHistory();
   const { post, posts, isLoading } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const classes = useStyles();
+  const { id } = useParams();
   
   useEffect(() => {
       dispatch(getPost(id));
   }, [id]);
 
-  if(!post) return null;
+  if (!post) return null;
 
   if (isLoading) {
     return (
@@ -28,7 +28,8 @@ const PostDetails = () => {
   }
 
   return (
-    <div className={classes.card}>
+    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+      <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">{post.title}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
@@ -45,6 +46,7 @@ const PostDetails = () => {
           <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
         </div>
       </div>
+    </Paper>
   )
 }
 

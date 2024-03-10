@@ -1,5 +1,5 @@
 import { Container, Grid, Grow, Paper, AppBar, TextField, Button } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input'
 import Posts from "../Posts/Posts";
