@@ -6,6 +6,7 @@ import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core'
 import useStyles from './styles'
 import memoriesLogo from '../../images/memoriesLogo.png'
 import memoriesText from '../../images/memoriesText.png'
+import * as actionType from '../../constants/actionTypes';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -15,7 +16,7 @@ const Navbar = () => {
     const location = useLocation();
 
     const logout = () => {
-        dispatch({ type: 'LOGOUT' })
+        dispatch({ type: actionType.LOGOUT })
         history.push('/');
         setUser(null);
     }
